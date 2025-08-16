@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Ledgerize report</title>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+<body>
+  <h1>Ledgerize report</h1>
+  <div id="fig"></div>
+  <script>
+    var fig = {{ figure | safe }};
+    Plotly.newPlot('fig', fig.data, fig.layout);
+  </script>
+</body>
+</html>
