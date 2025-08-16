@@ -1,0 +1,5 @@
+accounts:
+  - match: "DE123"
+    name: "N26-XXXX"
+  - match: "ACC1"
+    name: "Generic-ACC1"

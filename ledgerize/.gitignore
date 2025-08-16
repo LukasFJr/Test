@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+data/
+report/
+*.sqlite3
+*.db
+*.parquet
+*.csv
+*.jsonl
+.cache/
+.mypy_cache/
+.pytest_cache/
+coverage.xml
+htmlcov/

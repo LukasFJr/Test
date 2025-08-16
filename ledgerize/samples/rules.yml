@@ -1,0 +1,14 @@
+version: 1
+default_category: Uncategorized
+rules:
+  - id: groceries
+    when:
+      regex: "(?i)CARREFOUR|MONOPRIX"
+    set:
+      category: Groceries
+  - id: salary
+    when:
+      regex: "(?i)SALARY"
+    set:
+      category: Income
+order: explicit
