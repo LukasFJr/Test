@@ -43,6 +43,18 @@ poetry run ledgerize report --db data/ledgerize.db \
 
 `rules.yml` and `accounts.yml` are YAML configuration files that control how transactions are categorized and which accounts they belong to. Consult the examples in the `samples/` directory to craft your own.
 
+## ⚙️ Exécution sûre des CLI
+
+Certaines versions locales peuvent manquer de sous-commandes. Pour éviter les erreurs du type `Error: No such command 'vault'`, l'application interroge désormais automatiquement les binaires avant de les exécuter.
+
+```bash
+❌ poetry run ledgerize vault init --label personal
+
+✅ poetry run python -m app main --dry-run ledgerize import --help
+```
+
+`--dry-run` valide la sous-commande et affiche la commande sans l'exécuter.
+
 ## 🔐 Vault security
 
 Ledgerize can encrypt banking data into `.lzvault` files so nothing sensitive remains on disk.
@@ -128,4 +140,12 @@ poetry run ruff src tests
 poetry run black --check src tests
 poetry run mypy src
 poetry run pytest
+```
+
+## 🛠️ Dépannage
+
+Afficher les sous-commandes reconnues par un binaire :
+
+```bash
+poetry run python -m app tools print-subcommands ledgerize
 ```

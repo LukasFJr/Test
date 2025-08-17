@@ -59,8 +59,14 @@ def lock(data_dir: Path, vault_file: Path, key: Optional[bytes] = None) -> None:
     manifest = Manifest(
         version="1",
         created=datetime.utcnow().isoformat(),
-        files=[{"path": str(p.relative_to(data_dir)), "size": p.stat().st_size}
-               for p in data_dir.rglob("*") if p.is_file()],
+        files=[
+            {
+                "path": str(p.relative_to(data_dir)),
+                "size": str(p.stat().st_size),
+            }
+            for p in data_dir.rglob("*")
+            if p.is_file()
+        ],
         nonce=base64.b64encode(nonce).decode(),
     )
     aad = MAGIC + manifest.to_json()
@@ -80,12 +86,12 @@ def unlock(vault_file: Path, out_dir: Path, key: Optional[bytes] = None) -> None
     if not data.startswith(MAGIC):
         raise ValueError("invalid vault file")
     idx = len(MAGIC)
-    mlen = int.from_bytes(data[idx:idx + 4], "big")
+    mlen = int.from_bytes(data[idx : idx + 4], "big")
     idx += 4
-    mbytes = data[idx:idx + mlen]
+    mbytes = data[idx : idx + mlen]
     idx += mlen
-    manifest = json.loads(mbytes)
-    nonce = data[idx:idx + 12]
+    _manifest = json.loads(mbytes)
+    nonce = data[idx : idx + 12]
     idx += 12
     ct = data[idx:]
     aesgcm = AESGCM(key)
