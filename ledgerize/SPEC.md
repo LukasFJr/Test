@@ -9,3 +9,14 @@ Main modules:
 - `dedupe`: generation of transaction ids and duplicate removal.
 - `db`: SQLite persistence and exports.
 - `report`: HTML report generation using Jinja2 templates.
+
+## Security model
+
+Ledgerize optionally stores sensitive datasets inside encrypted `.lzvault`
+containers. AES‑256‑GCM protects the archives and keys are kept in the user's
+system keyring. This mitigates risks when laptops are lost or when repositories
+are shared publicly.
+
+The design does **not** provide forward secrecy and decrypted data may briefly
+exist on disk when reports are generated. No hardware security modules are
+used.

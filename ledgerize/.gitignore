@@ -1,6 +1,9 @@
 __pycache__/
 *.pyc
 data/
+vault/
+.ledgerize/
+*.lzvault
 report/
 *.sqlite3
 *.db
